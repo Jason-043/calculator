@@ -27,6 +27,7 @@ interface Action {
 }
 
 function reducer(state: State, {type, payload}: Action){
+  console.log(state.currentOperand);
   switch (type) {
     case ACTIONS.ADD_DIGIT:
       if(state.overwrite) return {
@@ -35,15 +36,13 @@ function reducer(state: State, {type, payload}: Action){
         overwrite: false
       }
       if(payload.digit === "0" && state.currentOperand === "0") return state;
-      if(payload.digit === "." && state.currentOperand.includes(".")) return state;
-
-      if(payload.digit === "." && state.currentOperand == ""){
-        console.log("here")
+      if(payload.digit === "." && (state.currentOperand == null || state.currentOperand == "")){
         return {
           ...state,
           currentOperand: "0."
         }
       }
+      if(payload.digit === "." && state.currentOperand.includes(".")) return state;
       return {
         ...state,
         currentOperand: `${state.currentOperand || ""}${payload.digit}`
@@ -107,6 +106,7 @@ function reducer(state: State, {type, payload}: Action){
 }
 
 function evaluate(state: State){
+  console.log(state)
   let prevOperand: number = parseFloat(state.previousOperand);
   let currOperand: number = parseFloat(state.currentOperand);
   if(isNaN(prevOperand) || isNaN(currOperand)) return "";
