@@ -144,8 +144,9 @@ function App() {
         <div className='previousOperand'>{formatOperand(previousOperand)} {operation}</div>
         <div className='currentOperand'>{formatOperand(currentOperand)}</div>
       </div>
-      <button className='spanTwo' onClick={ () => dispatch({type: ACTIONS.CLEAR })}>AC</button>
+      <button className='' onClick={ () => dispatch({type: ACTIONS.CLEAR })}>AC</button>
       <button onClick={ () => dispatch({type: ACTIONS.DELETE_DIGIT })}>DEL</button>
+      <button className='' onClick={ () => dispatch({type: ACTIONS.CLEAR })}>+/-</button>
       <OperationButton operation= "÷" dispatch={dispatch} />
       <DigitButton digit="1" dispatch={dispatch} />
       <DigitButton digit="2" dispatch={dispatch} />
