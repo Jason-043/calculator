@@ -37,6 +37,13 @@ function reducer(state: State, {type, payload}: Action){
       if(payload.digit === "0" && state.currentOperand === "0") return state;
       if(payload.digit === "." && state.currentOperand.includes(".")) return state;
 
+      if(payload.digit === "." && state.currentOperand == ""){
+        console.log("here")
+        return {
+          ...state,
+          currentOperand: "0."
+        }
+      }
       return {
         ...state,
         currentOperand: `${state.currentOperand || ""}${payload.digit}`
@@ -67,6 +74,7 @@ function reducer(state: State, {type, payload}: Action){
 
     case ACTIONS.CLEAR:
       return {}
+
     case ACTIONS.DELETE_DIGIT:
       if(state.overwrite) {
         return {
@@ -93,6 +101,8 @@ function reducer(state: State, {type, payload}: Action){
         currentOperand: evaluate(state),
         operation: null
       }
+    default:
+      return state;
   }
 }
 
@@ -109,6 +119,8 @@ function evaluate(state: State){
       return `${prevOperand * currOperand}`;
     case "÷":
       return `${prevOperand / currOperand}`;
+    default:
+      return "";
   }
 }
 
@@ -123,7 +135,9 @@ function formatOperand(operand: string){
 }
 
 function App() {
-  const [{currentOperand, previousOperand, operation}, dispatch] = useReducer(reducer,{})
+  
+  type DispatchType = (obj: { type: string, payload?: any }) => void;
+  const [{currentOperand, previousOperand, operation}, dispatch]: [State, DispatchType]  = useReducer(reducer, {})
   return (
     <div className = "calculatorGrid">
       <div className = "output"> 
