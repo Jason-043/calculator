@@ -3,6 +3,10 @@
 }
 
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
     background: linear-gradient(to right, #333, #aaa);
 }
@@ -10,11 +14,22 @@ body {
 .calculatorGrid {
     display: grid;
     justify-content: center;
-    margin-top: 2rem;
     grid-template-columns: repeat(4, 6rem);
-    grid-template-rows: minmax(7rem, auto) repeat(5, 6rem);
+    grid-template-rows: 30px repeat(6, 6rem);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
+.titleBar {
+    font-family: 'FreeMono', monospace;
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #3cd691, #0c84b7);
+    padding: 5px 0; /* Reduced padding */
+    height: 30px; /* Reduced height */
+}
 .calculatorGrid > button {
   cursor: pointer;
   font-size: 2rem;

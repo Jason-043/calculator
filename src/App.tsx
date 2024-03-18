@@ -140,6 +140,7 @@ function App() {
   const [{currentOperand, previousOperand, operation}, dispatch]: [State, DispatchType]  = useReducer(reducer, {})
   return (
     <div className = "calculatorGrid">
+      <div className="titleBar">Calculator</div>
       <div className = "output"> 
         <div className='previousOperand'>{formatOperand(previousOperand)} {operation}</div>
         <div className='currentOperand'>{formatOperand(currentOperand)}</div>
