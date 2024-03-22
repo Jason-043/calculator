@@ -27,8 +27,8 @@ body {
     justify-content: space-between;
     align-items: center;
     background: linear-gradient(to right, #3cd691, #0c84b7);
-    padding: 5px 0; /* Reduced padding */
-    height: 30px; /* Reduced height */
+    padding: 5px 0;
+    height: 30px; 
 }
 .calculatorGrid > button {
   cursor: pointer;

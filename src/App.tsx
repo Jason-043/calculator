@@ -2,13 +2,15 @@ import './App.css'
 import { useReducer } from 'react';
 import DigitButton from './digitButton';
 import OperationButton from './operationButton';
+import NegateButton from './negateButton';
 
 export const ACTIONS = {
   ADD_DIGIT: 'addDigit',
   CHOOSE_OPERATION: 'chooseOperation',
   CLEAR: 'clear',
   DELETE_DIGIT: 'deleteDigit',
-  EVALUATE: 'evaluate'
+  EVALUATE: 'evaluate',
+  NEGATE: 'negate'
 }
 
 interface State {
@@ -100,6 +102,12 @@ function reducer(state: State, {type, payload}: Action){
         currentOperand: evaluate(state),
         operation: null
       }
+    case ACTIONS.NEGATE:
+      if(state.currentOperand == null) return state;
+      return {
+        ...state,
+        currentOperand: `${-parseFloat(state.currentOperand)}`
+      }
     default:
       return state;
   }
@@ -147,7 +155,7 @@ function App() {
       </div>
       <button className='' onClick={ () => dispatch({type: ACTIONS.CLEAR })}>AC</button>
       <button onClick={ () => dispatch({type: ACTIONS.DELETE_DIGIT })}>DEL</button>
-      <button className='' onClick={ () => dispatch({type: ACTIONS.CLEAR })}>+/-</button>
+      <NegateButton operation= "+/-" dispatch={dispatch} />
       <OperationButton operation= "÷" dispatch={dispatch} />
       <DigitButton digit="1" dispatch={dispatch} />
       <DigitButton digit="2" dispatch={dispatch} />
